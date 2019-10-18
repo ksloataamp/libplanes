@@ -112,7 +112,8 @@ struct plane_data* plane_create(struct kms_device* device, int type, int index,
 
 	plane->index = index;
 	plane->alpha = 255;
-	plane->scale = 1.0;
+	plane->scale_x = 1.0;
+	plane->scale_y = 1.0;
 	plane->gem_name = create_gem_name(plane->fb);
 
 	return plane;
@@ -262,9 +263,10 @@ void plane_set_pos(struct plane_data* plane, int x, int y)
 	plane->y = y;
 }
 
-void plane_set_scale(struct plane_data* plane, double scale)
+void plane_set_scale(struct plane_data* plane, double scale_x, double scale_y)
 {
-	plane->scale = scale;
+	plane->scale_x = scale_x;
+	plane->scale_y = scale_y;
 }
 
 int plane_apply(struct plane_data* plane)
@@ -280,12 +282,12 @@ int plane_apply(struct plane_data* plane)
 					 plane->x, plane->y,
 					 plane->pan.x, plane->pan.y,
 					 plane->pan.width, plane->pan.height,
-					 plane->scale);
+					 plane->scale_x, plane->scale_y);
 	}
 
 	return kms_plane_set(plane->plane, plane->fb,
 			     plane->x, plane->y,
-			     plane->scale);
+			     plane->scale_x, plane->scale_y);
 }
 
 uint32_t plane_width(struct plane_data* plane)
