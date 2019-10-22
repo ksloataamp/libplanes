@@ -482,7 +482,7 @@ static struct plane_data* parse_plane(const char* config_file,
 					    device,
 					    device->screens[0]->height);
 		if (cJSON_IsNumber(scale))
-			plane_set_scale(data, scale->valuedouble, scale->valuedouble);
+			plane_set_scale(data, scale->valuedouble);
 
 		if (cJSON_IsNumber(rotate))
 			plane_set_rotate(data, rotate->valueint);

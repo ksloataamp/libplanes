@@ -303,7 +303,12 @@ void plane_set_pos(struct plane_data* plane, int x, int y)
 	plane->y = y;
 }
 
-void plane_set_scale(struct plane_data* plane, double scale_x, double scale_y)
+void plane_set_scale(struct plane_data* plane, double scale)
+{
+	plane_set_scale_independent(plane, scale, scale);
+}
+
+void plane_set_scale_independent(struct plane_data* plane, double scale_x, double scale_y)
 {
 	plane->scale_x = scale_x;
 	plane->scale_y = scale_y;
